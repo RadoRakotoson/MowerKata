@@ -1,7 +1,10 @@
 package com.mowitnow.mower;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
+import static com.mowitnow.mower.Direction.EAST;
 import static com.mowitnow.mower.Direction.NORTH;
 import static com.mowitnow.mower.Instruction.FORWARD;
 import static java.util.List.of;
@@ -52,5 +55,17 @@ public class MowerMovementTest {
                 () -> new Mower(initialPosition, NORTH).move(instructions, garden));
     }
 
+    @ParameterizedTest
+    @CsvSource(value = {"2, 2", "3, 3"})
+    void mower_cant_move_outside_of_the_garden_limit(int maxX, int maxY) {
+        var garden = new Garden(new Dimension(maxX, maxY));
+        var initialPosition = new Position(maxX - 1, 1);
+        var instructions = of(FORWARD);
+
+        var mower = new Mower(initialPosition, EAST).move(instructions, garden);
+
+        assertThat(mower.position()).isEqualTo(new Position(maxX, 1));
+        assertThat(mower.direction()).isEqualTo(EAST);
+    }
 
 }
