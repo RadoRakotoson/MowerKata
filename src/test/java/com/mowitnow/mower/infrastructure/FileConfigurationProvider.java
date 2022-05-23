@@ -8,8 +8,11 @@ import java.net.URISyntaxException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static com.mowitnow.mower.domain.Direction.*;
+import static com.mowitnow.mower.domain.Instruction.*;
 import static java.lang.Integer.parseInt;
 import static java.nio.file.Files.readString;
 import static java.util.Objects.requireNonNull;
@@ -18,13 +21,16 @@ public class FileConfigurationProvider implements ConfigurationProvider {
 
     private final Garden garden;
     private final List<Mower> mowers;
+    private final List<String> instructions;
 
     public FileConfigurationProvider(String configurationFile) throws URISyntaxException, IOException {
         URI fileLocation = requireNonNull(getClass().getClassLoader().getResource(configurationFile)).toURI();
-        String[] configurations = readString(Paths.get(fileLocation)).split("\n");
+        String fileContent = readString(Paths.get(fileLocation)).replace("\r", "");
+        String[] configurations = fileContent.split("\n");
 
         garden = getGardenInformationFromConfiguration(configurations[0]);
         mowers = getAllAvailableMowersFromConfiguration(configurations);
+        instructions = getAllInstructionFromConfiguration(configurations);
     }
 
     @Override
@@ -39,7 +45,41 @@ public class FileConfigurationProvider implements ConfigurationProvider {
 
     @Override
     public List<Instruction> getAllInstructionFor(int mowerIndex) {
-        return new ArrayList<>();
+        return toInstructions(instructions.get(mowerIndex));
+    }
+
+
+    private List<String> getAllInstructionFromConfiguration(String[] configurations) {
+        List<String> instructions = new ArrayList<>();
+        for (int i = 2; i < configurations.length; i += 2) {
+            instructions.add(configurations[i]);
+        }
+
+        return instructions;
+    }
+
+    private List<Instruction> toInstructions(String commandRaw) {
+        return commandRaw.chars()
+                .mapToObj(Character::toString)
+                .map(this::toInstruction)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .collect(Collectors.toList());
+    }
+
+    private Optional<Instruction> toInstruction(String instructionRaw) {
+        switch (instructionRaw) {
+            case "G" -> {
+                return Optional.of(LEFT);
+            }
+            case "D" -> {
+                return Optional.of(RIGHT);
+            }
+            case "A" -> {
+                return Optional.of(FORWARD);
+            }
+        }
+        return Optional.empty();
     }
 
     private Garden getGardenInformationFromConfiguration(String gardenConfiguration) {
