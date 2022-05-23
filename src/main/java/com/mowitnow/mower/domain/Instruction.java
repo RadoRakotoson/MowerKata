@@ -1,4 +1,4 @@
-package com.mowitnow.mower;
+package com.mowitnow.mower.domain;
 
 public enum Instruction {
     LEFT, RIGHT, FORWARD

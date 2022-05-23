@@ -1,4 +1,4 @@
-package com.mowitnow.mower;
+package com.mowitnow.mower.domain.exceptions;
 
 public class IllegalGardenMoveException extends RuntimeException {
 }

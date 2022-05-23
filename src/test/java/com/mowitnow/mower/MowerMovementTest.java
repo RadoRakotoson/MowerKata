@@ -1,12 +1,14 @@
 package com.mowitnow.mower;
 
+import com.mowitnow.mower.domain.*;
+import com.mowitnow.mower.domain.exceptions.IllegalGardenMoveException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import static com.mowitnow.mower.Direction.EAST;
-import static com.mowitnow.mower.Direction.NORTH;
-import static com.mowitnow.mower.Instruction.FORWARD;
+import static com.mowitnow.mower.domain.Direction.EAST;
+import static com.mowitnow.mower.domain.Direction.NORTH;
+import static com.mowitnow.mower.domain.Instruction.FORWARD;
 import static java.util.List.of;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;

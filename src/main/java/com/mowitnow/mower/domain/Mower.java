@@ -1,9 +1,9 @@
-package com.mowitnow.mower;
+package com.mowitnow.mower.domain;
+
+import com.mowitnow.mower.domain.exceptions.IllegalGardenMoveException;
 
 import java.util.List;
 import java.util.Optional;
-
-import static com.mowitnow.mower.Direction.*;
 
 public record Mower(Position position, Direction direction) {
     public Mower move(List<Instruction> instructions, Garden garden) {
