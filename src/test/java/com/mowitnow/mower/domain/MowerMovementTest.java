@@ -1,4 +1,4 @@
-package com.mowitnow.mower;
+package com.mowitnow.mower.domain;
 
 import com.mowitnow.mower.domain.*;
 import com.mowitnow.mower.domain.exceptions.IllegalGardenMoveException;
