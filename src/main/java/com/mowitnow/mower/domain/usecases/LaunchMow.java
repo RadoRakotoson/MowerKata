@@ -3,7 +3,7 @@ package com.mowitnow.mower.domain.usecases;
 import com.mowitnow.mower.domain.Garden;
 import com.mowitnow.mower.domain.Instruction;
 import com.mowitnow.mower.domain.Mower;
-import com.mowitnow.mower.infrastructure.ConfigurationProvider;
+import com.mowitnow.mower.domain.ConfigurationProvider;
 
 import java.util.List;
 import java.util.stream.Collectors;

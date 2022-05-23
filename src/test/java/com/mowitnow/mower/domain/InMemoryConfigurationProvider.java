@@ -1,7 +1,4 @@
-package com.mowitnow.mower.domain.usecases;
-
-import com.mowitnow.mower.domain.*;
-import com.mowitnow.mower.infrastructure.ConfigurationProvider;
+package com.mowitnow.mower.domain;
 
 import java.util.ArrayList;
 import java.util.List;

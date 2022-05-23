@@ -7,15 +7,18 @@ import java.util.Optional;
 
 public record Mower(Position position, Direction direction) {
     public Mower move(List<Instruction> instructions, Garden garden) {
-        Optional<Mower> mowers = instructions
-                .stream()
-                .map(instruction -> moveMower(garden, instruction))
-                .reduce((firstMower, lastMower) -> lastMower);
 
-        return mowers.orElseThrow();
+        Mower mower = this;
+        for (Instruction instruction: instructions) {
+            Position oldMowerPosition = mower.position();
+            Direction oldMowerDimension = mower.direction();
+            mower = moveMower(garden, instruction, oldMowerPosition, oldMowerDimension);
+        }
+
+        return Optional.of(mower).orElseThrow();
     }
 
-    private Mower moveMower(Garden garden, Instruction instruction) {
+    private Mower moveMower(Garden garden, Instruction instruction, Position position, Direction direction) {
         Direction nextDirection = direction;
         Position nextPosition = position;
 

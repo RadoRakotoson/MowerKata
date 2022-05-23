@@ -1,4 +1,4 @@
-package com.mowitnow.mower.infrastructure;
+package com.mowitnow.mower.domain;
 
 import com.mowitnow.mower.domain.Garden;
 import com.mowitnow.mower.domain.Instruction;

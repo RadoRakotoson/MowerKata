@@ -1,8 +1,9 @@
 package com.mowitnow.mower.domain.usecases;
 
+import com.mowitnow.mower.domain.InMemoryConfigurationProvider;
 import com.mowitnow.mower.domain.Mower;
 import com.mowitnow.mower.domain.Position;
-import com.mowitnow.mower.infrastructure.ConfigurationProvider;
+import com.mowitnow.mower.domain.ConfigurationProvider;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
