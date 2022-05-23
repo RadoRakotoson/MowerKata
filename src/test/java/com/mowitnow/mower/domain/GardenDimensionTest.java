@@ -13,4 +13,10 @@ public class GardenDimensionTest {
         assertThrows(NegativeDimensionException.class, () -> new Dimension(-1, 0));
     }
 
+    @Test
+    void garden_dimension_cant_have_Y_negative() throws NegativeDimensionException {
+
+        assertThrows(NegativeDimensionException.class, () -> new Dimension(0, -1));
+    }
+
 }
