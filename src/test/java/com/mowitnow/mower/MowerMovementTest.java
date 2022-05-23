@@ -32,4 +32,25 @@ public class MowerMovementTest {
                 () -> new Mower(initialPosition, NORTH).move(instructions, garden));
     }
 
+    @Test
+    void mower_cant_move_outside_of_the_garden_par_le_north() {
+        var garden = new Garden(new Dimension(2, 2));
+        var initialPosition = new Position(2, 2);
+        var instructions = of(FORWARD);
+
+        assertThrows(IllegalGardenMoveException.class,
+                () -> new Mower(initialPosition, NORTH).move(instructions, garden));
+    }
+
+    @Test
+    void mower_cant_move_outside_of_the_garden_limit() {
+        var garden = new Garden(new Dimension(1, 1));
+        var initialPosition = new Position(0, 1);
+        var instructions = of(FORWARD);
+
+        assertThrows(IllegalGardenMoveException.class,
+                () -> new Mower(initialPosition, NORTH).move(instructions, garden));
+    }
+
+
 }
